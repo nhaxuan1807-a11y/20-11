@@ -6,10 +6,7 @@
 <title>20/11</title>
 
 <style>
-  /* ===== KHÔNG CHO DARK MODE ẢNH HƯỞNG ===== */
-  :root {
-    color-scheme: light;
-  }
+  :root { color-scheme: light; }
 
   body {
     margin: 0;
@@ -17,20 +14,12 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-
-    /* 🌸 Gradient hồng giống trang cũ */
     background: linear-gradient(135deg, #ff9a9e, #fad0c4);
     overflow: hidden;
-
-    /* Fade-in tổng thể */
     animation: fadeIn 1.5s ease forwards;
   }
 
-  /* Hiệu ứng fade */
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
+  @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
 
   /* Hoa */
   #flower {
@@ -40,20 +29,18 @@
     animation: float 3s ease-in-out infinite;
   }
 
-  /* Hiệu ứng bay nhè nhẹ */
   @keyframes float {
     0%   { transform: translateY(0); }
     50%  { transform: translateY(-12px); }
     100% { transform: translateY(0); }
   }
 
-  /* Hover glow */
   #flower:hover {
     transform: scale(1.1);
     filter: drop-shadow(0 0 12px #fff);
   }
 
-  /* ===== PHẦN BAO LÁ THƯ ===== */
+  /* Phong bì */
   #envelope {
     width: 280px;
     height: 180px;
@@ -66,7 +53,6 @@
     animation: fadeIn 1s ease forwards;
   }
 
-  /* Nắp thư (tam giác) */
   #envelope:before {
     content: "20/11";
     font-size: 26px;
@@ -101,10 +87,33 @@
     line-height: 1.4;
   }
 
-  /* Tờ giấy trồi lên */
   @keyframes slideUp {
     from { transform: translate(-50%, 40px); opacity: 0; }
     to   { transform: translate(-50%, 0); opacity: 1; }
+  }
+
+  /* ==== LÁ RƠI ==== */
+  .leaf {
+    position: fixed;
+    top: -50px;
+    width: 25px;
+    height: 25px;
+    background-image: url('leaf.png'); /* nhớ thay ảnh lá */
+    background-size: cover;
+    opacity: 0.9;
+    pointer-events: none;
+    animation: fall 6s linear infinite, swing 3s ease-in-out infinite;
+  }
+
+  @keyframes fall {
+    0%   { transform: translateY(-50px); }
+    100% { transform: translateY(110vh); }
+  }
+
+  @keyframes swing {
+    0%   { transform: translateX(0); }
+    50%  { transform: translateX(25px); }
+    100% { transform: translateX(0); }
   }
 
 </style>
@@ -112,7 +121,7 @@
 <body>
 
 <img id="ChatGPT Image 18_10_36 19 thg 11, 2025.png" src="hoa20.png">
-  
+
 <div id="envelope"></div>
 <div id="letter"></div>
 
@@ -138,6 +147,27 @@
     letter.innerText = wishes[Math.floor(Math.random() * wishes.length)];
     letter.style.display = "block";
   };
+
+  /* ==== LÁ RƠI TỰ ĐỘNG ==== */
+  function createLeaf() {
+    const leaf = document.createElement("div");
+    leaf.classList.add("leaf");
+    const randomLeft = Math.random() * 100;
+    const randomSize = 20 + Math.random() * 20;
+    const delay = Math.random() * 5;
+
+    leaf.style.left = randomLeft + "vw";
+    leaf.style.width = randomSize + "px";
+    leaf.style.height = randomSize + "px";
+    leaf.style.animationDelay = delay + "s";
+
+    document.body.appendChild(leaf);
+
+    // Xóa sau khi rơi xong
+    setTimeout(() => leaf.remove(), 7000);
+  }
+
+  setInterval(createLeaf, 400);
 </script>
 
 </body>
