@@ -1,171 +1,150 @@
-Tuyệt vời! Tôi đã tổng hợp lại toàn bộ code HTML/CSS/JavaScript hoàn chỉnh sau các lần chỉnh sửa để khắc phục lỗi trình tự và click không được.Đây là bản code cuối cùng, đảm bảo trình tự hiển thị đúng như bạn mong muốn:Hoa hiện ra.Sau 1.5 giây, chữ "Click me now!" hiện ra (có thể click được).Click "Click me now!" $\rightarrow$ chữ biến mất, Bìa thư hiện ra (có icon thư và chữ "Mở thư").Click "Mở thư" $\rightarrow$ Bìa thư biến mất, Lời chúc hiện ra.📝 Code HTML Hoàn ChỉnhHTML<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Hoa 20/11 - Gửi Thầy Cô</title>
-  <style>
-    /* --- Cài đặt cơ bản --- */
-    body{
-      margin:0; 
-      display:flex; 
-      justify-content:center; 
-      align-items:center;
-      height:100vh; 
-      background:#220a0d; /* Nền tối */
-      font-family:sans-serif;
-      color: #f5f5f5;
-    }
-    .container{ 
-      text-align:center;
-    }
+    <meta charset="UTF-8">
+    <title>20–11</title>
+    <style>
+        body {
+            background: #000;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
 
-    /* --- Ảnh hoa hồng (rose) --- */
-    .rose{
-      max-width: 250px; 
-      height: auto;
-      mix-blend-mode: multiply; /* Hiệu ứng giúp nền trắng hòa trộn với nền */
-      filter: drop-shadow(0 0 15px rgba(0,0,0,0.7)); 
-      opacity: 0; /* Ẩn ban đầu */
-      animation: show-rose 1s ease forwards; /* Hiện ra sau khi tải trang */
-    }
-    @keyframes show-rose {
-      to { opacity: 1; }
-    }
+        /* Hoa */
+        #rose {
+            width: 330px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 1.3s ease;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+        #rose.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    /* --- Văn bản click (Bước 2) --- */
-    #clickText{
-      margin-top:30px; 
-      font-size:24px; 
-      font-weight:700;
-      color:#ffb6c1; 
-      cursor:pointer;
-      opacity:0; /* Ẩn ban đầu */
-      animation: show-element 1s ease forwards 1.5s; /* Hiện sau 1.5 giây */
-      transition: opacity 0.3s, transform 0.3s;
-    }
-    @keyframes show-element{
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    #clickText.hidden { 
-      opacity: 0;
-    }
-    #clickText:hover { transform: scale(1.05); }
+        /* Click me */
+        #clickText {
+            margin-top: 10px;
+            font-size: 28px;
+            color: #ff3366;
+            opacity: 0;
+            transition: 1s ease;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #clickText.show {
+            opacity: 1;
+        }
 
+        /* Nền mờ */
+        #overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
 
-    /* --- Lớp bìa thư (Bước 3) --- */
-    #envelope{
-      display:none; /* Ẩn ban đầu bằng CSS */
-      margin-top:30px;
-      cursor:pointer;
-      opacity: 0; /* Ẩn ban đầu để dùng animation khi hiện ra */
-      animation: show-element 0.8s ease forwards; /* Animation khi hiển thị */
-      animation-delay: 0.1s; 
-    }
-    .letter-cover{
-      width:280px; height:200px; 
-      background:#8b0000; /* Đỏ đậm */
-      border-radius:12px;
-      box-shadow:0 8px 25px rgba(0,0,0,0.6); 
-      display:flex; 
-      flex-direction: column; 
-      align-items:center; 
-      justify-content:center;
-      font-weight:600;
-      font-size:22px;
-      color:#fff6f8; 
-      transition: transform 0.3s, background 0.3s;
-    }
-    .letter-cover:hover { 
-      transform: scale(1.05); 
-      background: #a00000; 
-    }
+        /* Bì thư */
+        #envelope {
+            width: 300px;
+            height: 200px;
+            background: #fff;
+            position: relative;
+            cursor: pointer;
+            transform: scale(1);
+            transition: 0.5s ease;
+        }
+        #envelope::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 100px;
+            background: #ffcccc;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+        }
 
-    /* Icon thư */
-    .envelope-icon {
-      font-size: 90px; 
-      margin-bottom: 12px;
-      line-height: 1;
-      text-shadow: 0 0 10px rgba(255,255,255,0.3); 
-    }
+        /* Lá thư */
+        #letter {
+            display: none;
+            width: 70%;
+            background: #fff;
+            color: #000;
+            padding: 25px;
+            border-radius: 10px;
+            font-size: 20px;
+            text-align: left;
+            line-height: 1.6;
+            box-shadow: 0 0 20px rgba(255,255,255,0.5);
+            animation: fadeIn 1s forwards;
+        }
 
-    /* --- Lá thư chính (Bước 4) --- */
-    #realLetter{
-      display:none; /* Ẩn ban đầu bằng CSS */
-      margin-top:20px;
-      width:350px; padding:25px; 
-      background:#1a080a; /* Nền tối của lá thư */
-      border-radius:12px;
-      box-shadow:0 8px 30px rgba(0,0,0,0.7);
-      color: #f5f5f5; /* Màu chữ sáng */
-      border: 1px solid #4a1515; 
-      animation: open-letter 0.7s ease forwards; 
-    }
-    @keyframes open-letter{ 
-      from{ transform:scale(0.5); opacity:0; }
-      to{ transform:scale(1); opacity:1; }
-    }
-    #realLetter p {
-      margin: 12px 0;
-      line-height: 1.6;
-      text-align: left; 
-    }
-    #realLetter p:last-child {
-      text-align: right; 
-      margin-top: 25px;
-    }
-  </style>
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(20px);}
+            to   {opacity: 1; transform: translateY(0);}
+        }
+
+    </style>
 </head>
 <body>
-  <div class="container">
 
-        <img src="image.png" class="rose" alt="Hoa hồng">
-    
-        <div id="clickText">Click me now!</div>
+    <img id="rose" src="image.png">
 
-        <div id="envelope">
-      <div class="letter-cover">
-        <span class="envelope-icon">✉️</span>
-        Mở thư
-      </div>
-    </div>
+    <div id="clickText">Click me now!</div>
 
-        <div id="realLetter">
-      <p>Kính gửi thầy/cô,</p>
-      <p>Nhân ngày Nhà giáo Việt Nam 20/11, con xin gửi lời biết ơn chân thành
-      đến thầy/cô, người đã luôn tận tâm chỉ dạy, truyền cảm hứng và đồng hành
-      trên con đường học tập của chúng con.</p>
-      <p>Chúc thầy/cô luôn mạnh khỏe, hạnh phúc và giữ mãi ngọn lửa nhiệt huyết
-      trong sự nghiệp trồng người.</p>
-      <p style="font-weight:600">— Một học trò</p>
-    </div>
+    <!-- Nền mờ + bì thư -->
+    <div id="overlay">
+        <div id="envelope"></div>
+    </div>
 
-  </div>
+    <!-- Lá thư -->
+    <div id="letter">
+        <h2>Kính gửi thầy/cô,</h2>
+        <p>
+            Nhân ngày Nhà giáo Việt Nam 20/11, con xin gửi lời tri ân chân thành đến thầy/cô – 
+            người đã luôn tận tâm chỉ dạy, truyền cảm hứng và đồng hành trên con đường học tập của chúng con.
+        </p>
+        <p>
+            Chúc thầy/cô luôn mạnh khỏe, hạnh phúc và giữ mãi ngọn lửa nhiệt huyết trong sự nghiệp trồng người.
+        </p>
+        <p>— Một học trò</p>
+    </div>
 
-  <script>
-    const clickText = document.getElementById('clickText');
-    const envelope = document.getElementById('envelope');
-    const realLetter = document.getElementById('realLetter');
+    <script>
+        // Hoa xuất hiện sau khi load
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById("rose").classList.add("show");
+            }, 300);
 
-    // BƯỚC 3: Click 'Click me now!' -> Ẩn chữ và Hiện Bìa thư
-    clickText.addEventListener('click', ()=>{
-      // Vô hiệu hóa click ngay lập tức để ngăn double-click
-      clickText.style.pointerEvents = 'none'; 
-      
-      // Kích hoạt animation ẩn và ẩn chữ
-      clickText.classList.add('hidden'); 
-      
-      // Hiện Bìa thư (sử dụng flex để kích hoạt animation show-element)
-      envelope.style.display = 'flex'; 
-    });
+            setTimeout(() => {
+                document.getElementById("clickText").classList.add("show");
+            }, 1500);
+        };
 
-    // BƯỚC 4: Click Bìa thư -> Ẩn Bìa thư và Hiện Lời chúc
-    envelope.addEventListener('click', ()=>{
-      envelope.style.display = 'none'; // Ẩn Bìa thư
+        // Click vào hoa hoặc chữ → mở bì thư
+        document.getElementById("rose").onclick = openEnvelope;
+        document.getElementById("clickText").onclick = openEnvelope;
 
-      realLetter.style.display = 'block'; // Hiện Lá thư chính (Lời chúc)
-    });
-  </script>
+        function openEnvelope() {
+            document.getElementById("overlay").style.display = "flex";
+        }
+
+        // Click vào bì thư → mở thư thật
+        document.getElementById("envelope").onclick = () => {
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("letter").style.display = "block";
+        };
+    </script>
 </body>
 </html>
