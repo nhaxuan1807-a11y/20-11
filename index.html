@@ -10,8 +10,8 @@
     margin:0;
     display:flex;
     justify-content:center;
-    align-items:center;
-    height:100vh;
+    align-items:flex-start; /* căn hoa từ trên xuống */
+    min-height:100vh;
     background:#f7efed;
     font-family:sans-serif;
     text-align:center;
@@ -24,17 +24,16 @@
     align-items:center;
     width:100%;
     max-width:400px;
-    height:100%;
-    padding-top:120px; /* hoa xuống thấp hơn */
+    padding-top:220px; /* hoa xuống thấp hơn */
   }
 
   /* 🌹 HOA */
   .rose {
-    width:80vw; /* lớn hơn nữa */
-    max-width:300px;
+    width:85vw; 
+    max-width:320px;
     cursor:pointer;
     transition: transform 0.4s ease, opacity 0.6s ease;
-    margin-bottom:30px; /* khoảng cách đến lá thư */
+    margin-bottom:40px; /* khoảng cách đến lá thư */
   }
   .rose:hover { transform: scale(1.08); }
   .rose.fadeout { opacity:0; transform: scale(0.7); }
@@ -74,7 +73,7 @@
   /* 👇 LÁ THƯ */
   #letter {
     width:100%;
-    background:#444; /* nền tối để chữ trắng nổi bật */
+    background:#333; /* nền tối */
     border-radius:10px;
     border:2px solid #ffc7d9;
     padding:20px;
@@ -86,7 +85,7 @@
     position:relative;
     color:#fff; /* chữ trắng */
     text-align:left;
-    font-size:1.15rem; /* chữ to hơn */
+    font-size:1.2rem; /* chữ to hơn */
     line-height:1.5;
   }
 
@@ -121,7 +120,7 @@
     <!-- 📄 Lá thư -->
     <div id="letter">
       <p>Kính gửi cô Huyền,</p>
-      <p>Nhân ngày Nhà giáo Việt Nam 20/11, con xin gửi lời chúc chân thành đến cô.</p>
+      <p>Nhân ngày Nhà giáo Việt Nam 20/11, chúng em xin gửi lời chúc chân thành đến cô.</p>
       <p>Chúc cô luôn mạnh khỏe, hạnh phúc, tràn đầy nhiệt huyết và luôn là nguồn cảm hứng cho bao thế hệ học trò.</p>
       <p>Chúc cô có một ngày tràn đầy niềm vui, không lo deadline và luôn nhận được nụ cười!</p>
     </div>
@@ -170,3 +169,4 @@ document.head.appendChild(styleShake);
 
 </body>
 </html>
+
