@@ -13,7 +13,6 @@
     height:100vh;
     background:#f7efed;
     font-family:sans-serif;
-    text-align:center;
   }
 
   .container {
@@ -28,18 +27,19 @@
   .rose {
     width:70vw;
     max-width:300px;
-    max-height:300px; /* giới hạn chiều cao */
+    max-height:300px;
     cursor:pointer;
     transition: transform 0.3s ease, opacity 0.5s ease;
   }
   .rose:hover { transform: scale(1.05); }
 
+  /* Bìa thư */
   #envelope {
     display:none;
     width:90vw;
     max-width:350px;
     height:250px;
-    background:#ffdadf;
+    background:#ffcad4;
     border-radius:10px;
     box-shadow:0 6px 20px rgba(0,0,0,0.2);
     display:flex;
@@ -51,28 +51,27 @@
     position:relative;
   }
 
+  /* Tờ giấy trắng bên trong */
   #letter {
-    position:absolute;
-    top:10px;
-    left:10px;
-    right:10px;
-    bottom:10px;
     background:white;
+    width:85%;
+    height:80%;
     border-radius:8px;
     opacity:0;
-    transform: scale(0.8) translateY(-20px);
+    transform: scale(0.8) translateY(-30px);
     transition: transform 0.6s ease, opacity 0.6s ease;
-    padding:15px;
+    padding:20px;
+    box-sizing:border-box;
     display:flex;
     flex-direction:column;
     justify-content:flex-start;
-    overflow-y:auto; /* scroll nếu quá dài */
-    box-sizing:border-box;
+    pointer-events:none; /* lúc chưa mở không click được */
   }
 
   #letter.open {
     opacity:1;
     transform: scale(1) translateY(0);
+    pointer-events:auto; /* mở ra mới click được */
   }
 
   #letter p {
@@ -86,10 +85,11 @@
 
 <div class="container">
   <!-- Bông hoa -->
-  <img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" class="rose" id="rose">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Red_Rose.jpg/320px-Red_Rose.jpg" class="rose" id="rose">
 
-  <!-- Lá thư -->
+  <!-- Bìa thư -->
   <div id="envelope">
+    <!-- Tờ giấy trắng -->
     <div id="letter">
       <p>Kính gửi cô Huyền,</p>
       <p>Nhân ngày Nhà giáo Việt Nam 20/11, con xin gửi lời biết ơn chân thành đến cô, người đã luôn tận tâm chỉ dạy.</p>
@@ -104,7 +104,7 @@
   const envelope = document.getElementById('envelope');
   const letter = document.getElementById('letter');
 
-  // Click hoa -> hoa biến mất, thư xuất hiện
+  // Click hoa -> hoa biến mất, bìa thư xuất hiện
   rose.addEventListener('click', ()=>{
     rose.style.opacity = '0';
     setTimeout(()=>{ rose.style.display = 'none'; }, 500);
@@ -115,7 +115,7 @@
     }, 50);
   });
 
-  // Click thư -> thư mở ra
+  // Click bìa thư -> tờ giấy trắng xuất hiện
   envelope.addEventListener('click', ()=>{
     letter.classList.add('open');
   });
