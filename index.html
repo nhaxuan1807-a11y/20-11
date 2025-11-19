@@ -118,7 +118,6 @@
       <p class="line">Chúc cô luôn mạnh khỏe, hạnh phúc, tràn đầy nhiệt huyết và là nguồn cảm hứng cho bao thế hệ học trò</p>
       <p class="line">Chúc cô ngày 20/11 tràn đầy niềm vui, không lo deadline và luôn nhận được nụ cười từ học trò!</p>
       <p class="line">Chúc cô luôn rạng rỡ tỏa sáng với nụ cười ấm áp và trái tim tận tụy người đã gieo cho tụi em những điều đẹp nhất</p>
-
     </div>
   </div>
 </div>
@@ -127,7 +126,9 @@
 const rose = document.getElementById("rose");
 const envelope = document.getElementById("envelope");
 const letter = document.getElementById("letter");
-const lines = document.querySelectorAll(".line");
+
+// **Sửa selector ở đây để chọn đúng các dòng trong lá thư**
+const lines = document.querySelectorAll("#letter .line");
 
 rose.addEventListener("click", () => {
   rose.classList.add("fadeout");
