@@ -6,37 +6,35 @@
 <title>Hoa 20/11</title>
 
 <style>
-  /* BODY */
   body {
     margin:0;
     display:flex;
     justify-content:center;
-    align-items:center; /* căn giữa theo dọc */
-    min-height:100vh;
+    align-items:center;
+    height:100vh;
     background:#f7efed;
     font-family:sans-serif;
     text-align:center;
-    padding:10px;
-    box-sizing:border-box;
   }
 
-  /* CONTAINER */
   .container {
     display:flex;
     flex-direction:column;
-    justify-content:center;
+    justify-content:flex-start; /* đẩy xuống giữa màn hình */
     align-items:center;
     width:100%;
-    max-width:380px;
+    max-width:400px;
     height:100%;
+    padding-top:60px; /* khoảng cách từ trên */
   }
 
   /* 🌹 HOA */
   .rose {
-    width:60vw;
-    max-width:200px;
+    width:75vw; /* lớn hơn */
+    max-width:280px;
     cursor:pointer;
     transition: transform 0.4s ease, opacity 0.6s ease;
+    margin-bottom:20px; /* khoảng cách đến lá thư */
   }
   .rose:hover { transform: scale(1.08); }
   .rose.fadeout { opacity:0; transform: scale(0.7); }
@@ -44,11 +42,11 @@
   /* ✉️ BÌA THƯ */
   #envelope {
     display:none;
-    width:90%;
-    max-width:340px;
+    width:90vw;
+    max-width:360px;
     background: linear-gradient(135deg, #ff9a9e, #fad0c4);
     color:#ffffff;
-    font-size:26px;
+    font-size:28px;
     font-weight:700;
     border-radius:15px;
     box-shadow:0 8px 25px rgba(0,0,0,0.25);
@@ -61,7 +59,7 @@
     transition: transform 0.7s cubic-bezier(.25,1.5,.5,1);
     position:relative;
     user-select:none;
-    padding:10px;
+    padding:20px;
   }
 
   /* Glow chữ 20/11 */
@@ -73,19 +71,23 @@
     50% { text-shadow:0 0 12px #fff, 0 0 18px #ff8ab3; }
   }
 
-  /* 📄 LÁ THƯ */
+  /* 👇 LÁ THƯ */
   #letter {
     width:100%;
-    background:#333; /* nền lá thư tối để chữ trắng nổi */
+    background:#444; /* nền tối để chữ trắng nổi bật */
     border-radius:10px;
     border:2px solid #ffc7d9;
-    padding:15px;
+    padding:20px;
     opacity:0;
-    transform: translateY(20px) scale(0.85);
+    transform: translateY(30px) scale(0.85);
     transition: transform 0.7s ease, opacity 0.7s ease;
+    overflow-y:auto;
     box-shadow:0 6px 20px rgba(0,0,0,0.15);
+    position:relative;
     color:#fff; /* chữ trắng */
     text-align:left;
+    font-size:1.1rem; /* chữ to hơn */
+    line-height:1.5;
   }
 
   #letter.open {
@@ -93,12 +95,12 @@
     transform: translateY(0) scale(1);
   }
 
-  /* Lời chúc từng dòng */
+  /* Lời chúc xuất hiện từng dòng */
   #letter p {
     opacity:0;
     transform: translateY(10px);
     transition: opacity 0.6s ease, transform 0.6s ease;
-    margin-bottom:10px;
+    margin-bottom:12px;
   }
   #letter p.show {
     opacity:1;
@@ -130,35 +132,36 @@
 const rose = document.getElementById('rose');
 const envelope = document.getElementById('envelope');
 const letter = document.getElementById('letter');
-const paragraphs = letter.querySelectorAll('p'); // lấy các <p> trong thư
+const paragraphs = letter.querySelectorAll('p'); // lấy tất cả <p>
 
-// CLICK HOA
 rose.addEventListener('click', () => {
   rose.classList.add('fadeout');
-  setTimeout(() => { rose.style.display='none'; }, 500);
+  setTimeout(() => { rose.style.display = 'none'; }, 500);
 
-  envelope.style.display='flex';
-  setTimeout(() => { envelope.style.transform='scale(1)'; }, 20);
+  envelope.style.display = 'flex';
+  setTimeout(() => { envelope.style.transform = 'scale(1)'; }, 20);
 });
 
-// CLICK BÌA THƯ
+// Mở thư
 envelope.addEventListener('click', () => {
-  envelope.style.animation='shake 0.3s';
-  setTimeout(()=>{ envelope.style.animation=''; },300);
+  envelope.style.animation = 'shake 0.3s';
+  setTimeout(() => { envelope.style.animation = ''; }, 300);
 
   letter.classList.add('open');
 
-  // Hiện từng dòng
-  let delay=400;
-  paragraphs.forEach(p=>{
-    setTimeout(()=>{ p.classList.add('show'); }, delay);
+  // Hiện từng dòng <p>
+  let delay = 400;
+  paragraphs.forEach(p => {
+    setTimeout(() => {
+      p.classList.add('show');
+    }, delay);
     delay += 300;
   });
 });
 
 // Animation rung
-const styleShake=document.createElement('style');
-styleShake.innerHTML=`
+const styleShake = document.createElement('style');
+styleShake.innerHTML = `
 @keyframes shake {
   0% { transform: scale(1) rotate(0deg); }
   25% { transform: scale(1.02) rotate(1deg); }
