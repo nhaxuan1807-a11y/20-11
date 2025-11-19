@@ -3,170 +3,171 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hoa 20/11</title>
+<title>20/11</title>
 
 <style>
+  :root { color-scheme: light; }
+
   body {
-    margin:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    background:#f7efed;
-    font-family:sans-serif;
-    text-align:center;
-    transition: filter 0.5s ease;
-  }
-
-  .container {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    width:100%;
-    max-width:400px;
-  }
-
-  /* 🌹 HIỆU ỨNG HOA */
-  .rose {
-    width:70vw;
-    max-width:300px;
-    cursor:pointer;
-    transition: transform 0.4s ease, opacity 0.6s ease;
-  }
-  .rose:hover { transform: scale(1.08); }
-  .rose.fadeout { opacity:0; transform: scale(0.7); }
-
-  /* ✉️ BÌA THƯ */
-  #envelope {
-    display:none;
-    width:90vw;
-    max-width:350px;
-    height:200px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    color:#ffffff;
-    font-size:26px;
-    font-weight:700;
-    border-radius:15px;
-    box-shadow:0 8px 25px rgba(0,0,0,0.25);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    cursor:pointer;
-    transform: scale(0);
-    transition: transform 0.7s cubic-bezier(.25,1.5,.5,1);
-    position:relative;
-    user-select:none;
+    overflow: hidden;
+    animation: fadeIn 1.5s ease forwards;
   }
 
-  /* Glow chữ 20/11 */
-  #envelope span {
-    animation: glow 2s ease-in-out infinite;
-  }
-  @keyframes glow {
-    0%, 100% { text-shadow:0 0 8px #fff, 0 0 12px #ffb6d1; }
-    50% { text-shadow:0 0 12px #fff, 0 0 18px #ff8ab3; }
+  @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+  /* Hoa */
+  #flower {
+    width: 200px;
+    cursor: pointer;
+    transition: transform 0.4s ease, filter 0.4s ease;
+    animation: float 3s ease-in-out infinite;
   }
 
-  /* 👇 LÁ THƯ BÊN TRONG */
+  @keyframes float {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-12px); }
+    100% { transform: translateY(0); }
+  }
+
+  #flower:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 12px #fff);
+  }
+
+  /* Phong bì */
+  #envelope {
+    width: 280px;
+    height: 180px;
+    background: #fff;
+    border-radius: 12px;
+    display: none;
+    position: relative;
+    box-shadow: 0 0 25px rgba(255, 100, 150, 0.5);
+    cursor: pointer;
+    animation: fadeIn 1s ease forwards;
+  }
+
+  #envelope:before {
+    content: "20/11";
+    font-size: 26px;
+    font-weight: bold;
+    color: #ff4f8b;
+    position: absolute;
+    top: -55px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fffafc;
+    padding: 12px 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255, 130, 170, 0.5);
+  }
+
+  /* Tờ giấy */
   #letter {
-    position:absolute;
-    top:10px; left:10px; right:10px; bottom:10px;
-    background:white;
-    border-radius:10px;
-    border:2px solid #ffc7d9;
-    padding:15px;
-    opacity:0;
-    transform: translateY(40px) scale(0.85);
-    transition: transform 0.7s ease, opacity 0.7s ease;
-    overflow-y:auto;
-    box-shadow:0 6px 20px rgba(0,0,0,0.15);
+    width: 240px;
+    height: auto;
+    background: #fff;
+    padding: 18px;
+    border-radius: 12px;
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 25px rgba(255, 100, 150, 0.5);
+    animation: slideUp 1s ease forwards;
+    white-space: pre-line;
+    font-size: 16px;
+    line-height: 1.4;
   }
 
-  #letter.open {
-    opacity:1;
-    transform: translateY(0) scale(1);
+  @keyframes slideUp {
+    from { transform: translate(-50%, 40px); opacity: 0; }
+    to   { transform: translate(-50%, 0); opacity: 1; }
   }
 
-  /* Lời chúc xuất hiện từng dòng */
-  .line {
-    opacity:0;
-    transform: translateY(10px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    margin-bottom:10px;
-    text-align:left;
+  /* ==== LÁ RƠI ==== */
+  .leaf {
+    position: fixed;
+    top: -50px;
+    width: 25px;
+    height: 25px;
+    background-image: url('leaf.png'); /* nhớ thay ảnh lá */
+    background-size: cover;
+    opacity: 0.9;
+    pointer-events: none;
+    animation: fall 6s linear infinite, swing 3s ease-in-out infinite;
   }
-  .line.show {
-    opacity:1;
-    transform: translateY(0);
+
+  @keyframes fall {
+    0%   { transform: translateY(-50px); }
+    100% { transform: translateY(110vh); }
   }
+
+  @keyframes swing {
+    0%   { transform: translateX(0); }
+    50%  { transform: translateX(25px); }
+    100% { transform: translateX(0); }
+  }
+
 </style>
 </head>
 <body>
 
-<div class="container">
-  <!-- 🌹 Hoa -->
-  <img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" class="rose" id="rose" alt="Hoa hồng">
+<img id="flower" src="ChatGPT Image 18_10_36 19 thg 11, 2025.png">
 
-  <!-- ✉️ Bìa thư -->
-  <div id="envelope">
-    <span>20/11</span>
-
-    <!-- 📄 Lá thư -->
-    <div id="letter">
-      <p>Kính gửi cô Huyền,</p>
-      <p>Nhân ngày Nhà giáo Việt Nam 20/11, con xin gửi lời biết ơn chân thành đến cô, người đã luôn tận tâm chỉ dạy.</p>
-      <p>Chúc cô luôn mạnh khỏe, hạnh phúc, tràn đầy nhiệt huyết và luôn là nguồn cảm hứng cho bao thế hệ học trò.</p>
-      <p>Chúc cô ngày 20/11 tràn đầy niềm vui, không lo deadline và luôn nhận được nụ cười!</p>
-    </div>
-  </div>
-</div>
+<div id="envelope"></div>
+<div id="letter"></div>
 
 <script>
-const rose = document.getElementById('rose');
-const envelope = document.getElementById('envelope');
-const letter = document.getElementById('letter');
-const paragraphs = letter.querySelectorAll('p'); // Lấy tất cả <p> bên trong #letter
+  const flower = document.getElementById("flower");
+  const envelope = document.getElementById("envelope");
+  const letter = document.getElementById("letter");
 
-rose.addEventListener('click', () => {
-  rose.classList.add('fadeout');
-  setTimeout(() => { rose.style.display = 'none'; }, 500);
+  const wishes = [
+    "Nhân ngày Nhà giáo Việt Nam 20/11, con xin gửi lời biết ơn chân thành đến cô, người đã luôn tận tâm chỉ dạy.",
+    "Chúc cô luôn mạnh khỏe, hạnh phúc, tràn đầy nhiệt huyết và là nguồn cảm hứng cho bao thế hệ học trò.",
+    "Chúc cô ngày 20/11 tràn đầy niềm vui, không lo deadline và luôn nhận được nụ cười từ học trò!",
+    "Chúc cô luôn rạng rỡ tỏa sáng với nụ cười ấm áp và trái tim tận tụy người đã gieo cho tụi em những điều đẹp nhất",
+  ];
 
-  envelope.style.display = 'flex';
-  setTimeout(() => { envelope.style.transform = 'scale(1)'; }, 20);
-});
+  flower.onclick = () => {
+    flower.style.display = "none";
+    envelope.style.display = "block";
+  };
 
-// Mở thư
-envelope.addEventListener('click', () => {
-  envelope.style.animation = 'shake 0.3s';
-  setTimeout(() => { envelope.style.animation = ''; }, 300);
+  envelope.onclick = () => {
+    envelope.style.display = "none";
+    letter.innerText = wishes[Math.floor(Math.random() * wishes.length)];
+    letter.style.display = "block";
+  };
 
-  letter.style.opacity = 1; // mở lá thư
+  /* ==== LÁ RƠI TỰ ĐỘNG ==== */
+  function createLeaf() {
+    const leaf = document.createElement("div");
+    leaf.classList.add("leaf");
+    const randomLeft = Math.random() * 100;
+    const randomSize = 20 + Math.random() * 20;
+    const delay = Math.random() * 5;
 
-  // Hiện từng dòng <p>
-  let delay = 400;
-  paragraphs.forEach(p => {
-    p.style.opacity = 0;
-    p.style.transform = 'translateY(10px)';
-    setTimeout(() => {
-      p.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      p.style.opacity = 1;
-      p.style.transform = 'translateY(0)';
-    }, delay);
-    delay += 300;
-  });
-});
+    leaf.style.left = randomLeft + "vw";
+    leaf.style.width = randomSize + "px";
+    leaf.style.height = randomSize + "px";
+    leaf.style.animationDelay = delay + "s";
 
-// Animation rung
-const styleShake = document.createElement('style');
-styleShake.innerHTML = `
-@keyframes shake {
-  0% { transform: scale(1) rotate(0deg); }
-  25% { transform: scale(1.02) rotate(1deg); }
-  50% { transform: scale(1) rotate(0deg); }
-  75% { transform: scale(1.02) rotate(-1deg); }
-  100% { transform: scale(1) rotate(0); }
-}`;
-document.head.appendChild(styleShake);
+    document.body.appendChild(leaf);
+
+    // Xóa sau khi rơi xong
+    setTimeout(() => leaf.remove(), 7000);
+  }
+
+  setInterval(createLeaf, 400);
 </script>
 
 </body>
