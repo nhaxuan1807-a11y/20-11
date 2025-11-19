@@ -8,12 +8,15 @@
     body{
       margin:0; display:flex; justify-content:center; align-items:center;
       height:100vh; background:#f7efed; font-family:sans-serif;
+      padding:10px;
+      box-sizing:border-box;
+      text-align:center;
     }
-    .container{ text-align:center; }
 
     /* Ảnh hoa */
     .rose{
-      width:240px; 
+      width:70vw; /* responsive theo màn hình */
+      max-width:300px;
       cursor:pointer;
       transition: transform 0.3s ease;
     }
@@ -21,36 +24,40 @@
       transform: scale(1.05);
     }
 
-    /* Lớp thư đầu tiên */
-    #envelope{
+    /* Lá thư */
+    #letter{
       display:none;
-      margin-top:30px;
-      cursor:pointer;
-    }
-    .letter-cover{
-      width:260px; height:180px;
-      background:#ffdadf;
-      border-radius:10px;
-      box-shadow:0 6px 20px rgba(0,0,0,0.15);
-      display:flex; align-items:center; justify-content:center;
-      font-weight:600;
-      font-size:20px;
-      color:#a13333;
-    }
-
-    /* Lá thư mở ra */
-    #realLetter{
-      display:none;
-      margin-top:20px;
-      width:320px; padding:20px;
+      width:90vw;
+      max-width:350px;
+      padding:20px;
       background:white;
       border-radius:10px;
       box-shadow:0 6px 30px rgba(0,0,0,0.18);
+      cursor:pointer;
       animation: open 0.6s ease forwards;
     }
+
+    /* Lời chúc cuối cùng */
+    #greeting{
+      display:none;
+      width:90vw;
+      max-width:350px;
+      padding:20px;
+      background:#ffdadf;
+      border-radius:10px;
+      font-weight:600;
+      color:#a13333;
+      box-shadow:0 6px 20px rgba(0,0,0,0.15);
+      animation: fadeIn 0.6s ease forwards;
+    }
+
     @keyframes open{
       from{ transform:scale(0.6); opacity:0; }
       to{ transform:scale(1); opacity:1; }
+    }
+    @keyframes fadeIn{
+      from{ opacity:0; }
+      to{ opacity:1; }
     }
   </style>
 </head>
@@ -60,39 +67,39 @@
     <!-- ẢNH HOA -->
     <img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" alt="rose" class="rose" id="rose">
 
-    <!-- LỚP BÌA THƯ -->
-    <div id="envelope">
-      <div class="letter-cover">Mở thư</div>
-    </div>
-
-    <!-- LÁ THƯ CHÍNH -->
-    <div id="realLetter">
+    <!-- LÁ THƯ -->
+    <div id="letter">
       <p>Kính gửi thầy/cô,</p>
       <p>Nhân ngày Nhà giáo Việt Nam 20/11, con xin gửi lời biết ơn chân thành
       đến thầy/cô, người đã luôn tận tâm chỉ dạy, truyền cảm hứng và đồng hành
       trên con đường học tập của chúng con.</p>
       <p>Chúc thầy/cô luôn mạnh khỏe, hạnh phúc và giữ mãi ngọn lửa nhiệt huyết
       trong sự nghiệp trồng người.</p>
-      <p style="text-align:right; font-weight:600">— Một học trò</p>
+    </div>
+
+    <!-- LỜI CHÚC -->
+    <div id="greeting">
+      <p style="font-size:18px;">— Một học trò</p>
     </div>
 
   </div>
 
   <script>
     const rose = document.getElementById('rose');
-    const envelope = document.getElementById('envelope');
-    const realLetter = document.getElementById('realLetter');
+    const letter = document.getElementById('letter');
+    const greeting = document.getElementById('greeting');
 
-    // Click ảnh hoa -> hiện bìa thư
+    // Click hoa -> ẩn hoa, hiện thư
     rose.addEventListener('click', ()=>{
-      envelope.style.display = 'block';
+      rose.style.display = 'none';
+      letter.style.display = 'block';
     });
 
-    // Click bìa thư -> mở thư thật
-    envelope.addEventListener('click', ()=>{
-      realLetter.style.display = 'block';
+    // Click thư -> ẩn thư, hiện lời chúc
+    letter.addEventListener('click', ()=>{
+      letter.style.display = 'none';
+      greeting.style.display = 'block';
     });
   </script>
 </body>
 </html>
-
