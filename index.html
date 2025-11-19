@@ -39,7 +39,7 @@
     width:90vw;
     max-width:350px;
     height:250px;
-    background:#81c784; /* xanh pastel dễ nhìn cả light/dark */
+    background:#ffcad4; /* bìa thư hồng */
     border-radius:10px;
     box-shadow:0 6px 20px rgba(0,0,0,0.2);
     display:flex;
@@ -51,7 +51,7 @@
     position:relative;
     font-weight:bold;
     font-size:28px;
-    color:#37474f; /* chữ tương phản tốt */
+    color:#a13333;
   }
 
   /* Tờ giấy trắng */
@@ -61,7 +61,7 @@
     left:10px;
     right:10px;
     bottom:10px;
-    background:#fdf5e6; /* be nhạt dễ đọc */
+    background:white;
     border-radius:8px;
     opacity:0;
     transform: scale(0.7) translateY(-30px);
@@ -72,7 +72,6 @@
     justify-content:flex-start;
     overflow-y:auto;
     box-sizing:border-box;
-    color:#000; /* chữ đen trên tờ giấy */
   }
 
   #letter.open {
@@ -93,13 +92,6 @@
     opacity:1;
     transform: translateY(0);
   }
-
-  /* Dark mode */
-  @media (prefers-color-scheme: dark) {
-    body { background:#121212; }
-    #envelope { background:#4caf50; color:#ffffff; }
-    #letter { background:#fdf5e6; color:#000; }
-  }
 </style>
 </head>
 <body>
@@ -107,7 +99,7 @@
 <div class="container">
   <!-- Bông hoa -->
   <img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" class="rose" id="rose">
-  
+
   <!-- Bìa thư -->
   <div id="envelope">
     20/11
