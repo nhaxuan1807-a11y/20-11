@@ -20,21 +20,21 @@
   .container {
     display:flex;
     flex-direction:column;
-    justify-content:flex-start; /* đẩy xuống giữa màn hình */
+    justify-content:flex-start; 
     align-items:center;
     width:100%;
     max-width:400px;
     height:100%;
-    padding-top:60px; /* khoảng cách từ trên */
+    padding-top:120px; /* hoa xuống thấp hơn */
   }
 
   /* 🌹 HOA */
   .rose {
-    width:75vw; /* lớn hơn */
-    max-width:280px;
+    width:80vw; /* lớn hơn nữa */
+    max-width:300px;
     cursor:pointer;
     transition: transform 0.4s ease, opacity 0.6s ease;
-    margin-bottom:20px; /* khoảng cách đến lá thư */
+    margin-bottom:30px; /* khoảng cách đến lá thư */
   }
   .rose:hover { transform: scale(1.08); }
   .rose.fadeout { opacity:0; transform: scale(0.7); }
@@ -86,7 +86,7 @@
     position:relative;
     color:#fff; /* chữ trắng */
     text-align:left;
-    font-size:1.1rem; /* chữ to hơn */
+    font-size:1.15rem; /* chữ to hơn */
     line-height:1.5;
   }
 
@@ -132,7 +132,7 @@
 const rose = document.getElementById('rose');
 const envelope = document.getElementById('envelope');
 const letter = document.getElementById('letter');
-const paragraphs = letter.querySelectorAll('p'); // lấy tất cả <p>
+const paragraphs = letter.querySelectorAll('p');
 
 rose.addEventListener('click', () => {
   rose.classList.add('fadeout');
@@ -142,19 +142,15 @@ rose.addEventListener('click', () => {
   setTimeout(() => { envelope.style.transform = 'scale(1)'; }, 20);
 });
 
-// Mở thư
 envelope.addEventListener('click', () => {
   envelope.style.animation = 'shake 0.3s';
   setTimeout(() => { envelope.style.animation = ''; }, 300);
 
   letter.classList.add('open');
 
-  // Hiện từng dòng <p>
   let delay = 400;
   paragraphs.forEach(p => {
-    setTimeout(() => {
-      p.classList.add('show');
-    }, delay);
+    setTimeout(() => { p.classList.add('show'); }, delay);
     delay += 300;
   });
 });
