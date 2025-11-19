@@ -1,89 +1,128 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hoa 20/11</title>
 <style>
   body {
-    margin:0; 
-    display:flex; 
-    justify-content:center; 
+    margin:0;
+    display:flex;
+    justify-content:center;
     align-items:center;
-    height:100vh; 
-    background:#f7efed; 
+    height:100vh;
+    background:#f7efed;
     font-family:sans-serif;
-    padding:10px;
-    box-sizing:border-box;
     text-align:center;
   }
 
   .rose {
-    width:70vw; 
-    max-width:300px; 
+    width:70vw;
+    max-width:300px;
     cursor:pointer;
+    transition: transform 0.3s ease, opacity 0.5s ease;
   }
 
-  #letter, #greeting {
+  .rose:hover { transform: scale(1.05); }
+
+  #envelope {
     display:none;
     width:90vw;
     max-width:350px;
-    padding:20px;
+    height:200px;
+    background:#ffdadf;
     border-radius:10px;
-    box-shadow:0 6px 30px rgba(0,0,0,0.18);
+    box-shadow:0 6px 20px rgba(0,0,0,0.2);
+    display:flex;
+    justify-content:center;
+    align-items:center;
     cursor:pointer;
+    transform: scale(0);
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    position:relative;
   }
 
   #letter {
+    position:absolute;
+    top:10px;
+    left:10px;
+    right:10px;
+    bottom:10px;
     background:white;
+    border-radius:8px;
+    opacity:0;
+    transform: scale(0.8) translateY(-50px);
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+
+  #letter.open {
+    opacity:1;
+    transform: scale(1) translateY(0);
   }
 
   #greeting {
+    display:none;
+    margin-top:220px;
+    width:90vw;
+    max-width:300px;
+    padding:15px;
     background:#ffdadf;
+    border-radius:10px;
     font-weight:600;
     color:#a13333;
+    box-shadow:0 6px 20px rgba(0,0,0,0.15);
+    animation: slideDown 0.6s ease forwards;
+  }
+
+  @keyframes slideDown {
+    from { opacity:0; transform: translateY(-20px); }
+    to { opacity:1; transform: translateY(0); }
   }
 </style>
 </head>
 <body>
-  <div class="container">
 
-    <!-- ẢNH HOA -->
-    <img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" class="rose" id="rose">
+<img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" class="rose" id="rose">
 
-    <!-- LÁ THƯ -->
-    <div id="letter">
-      <p>Kính gửi thầy/cô,</p>
-      <p>Nhân ngày Nhà giáo Việt Nam 20/11, con xin gửi lời biết ơn chân thành
-      đến thầy/cô, người đã luôn tận tâm chỉ dạy, truyền cảm hứng và đồng hành
-      trên con đường học tập của chúng con.</p>
-      <p>Chúc thầy/cô luôn mạnh khỏe, hạnh phúc và giữ mãi ngọn lửa nhiệt huyết
-      trong sự nghiệp trồng người.</p>
-    </div>
-
-    <!-- LỜI CHÚC -->
-    <div id="greeting">
-      <p>— Một học trò</p>
-    </div>
-
+<div id="envelope">
+  <div id="letter">
+    <p>Kính gửi thầy/cô,</p>
+    <p>Nhân ngày Nhà giáo Việt Nam 20/11, con xin gửi lời biết ơn chân thành
+    đến thầy/cô, người đã luôn tận tâm chỉ dạy.</p>
+    <p>Chúc thầy/cô luôn mạnh khỏe và hạnh phúc.</p>
   </div>
+</div>
+
+<div id="greeting">
+  <p>— Một học trò</p>
+</div>
 
 <script>
   const rose = document.getElementById('rose');
+  const envelope = document.getElementById('envelope');
   const letter = document.getElementById('letter');
   const greeting = document.getElementById('greeting');
 
-  // Click hoa → ẩn hoa, hiện thư
-  rose.addEventListener('click', () => {
-    rose.style.display = 'none';
-    letter.style.display = 'block';
+  // Step 1: Click hoa -> hoa biến mất, thư xuất hiện
+  rose.addEventListener('click', ()=>{
+    rose.style.opacity = '0';
+    setTimeout(()=>{ rose.style.display = 'none'; }, 500);
+    envelope.style.display = 'flex';
+    setTimeout(()=>{ envelope.style.transform = 'scale(1)'; envelope.style.opacity='1'; }, 50);
   });
 
-  // Click thư → ẩn thư, hiện lời chúc
-  letter.addEventListener('click', () => {
-    letter.style.display = 'none';
-    greeting.style.display = 'block';
+  // Step 2: Click thư -> thư mở ra, lời chúc xuất hiện
+  envelope.addEventListener('click', ()=>{
+    letter.classList.add('open');
+    setTimeout(()=>{
+      greeting.style.display='block';
+    }, 600);
   });
 </script>
+
 </body>
 </html>
