@@ -11,34 +11,15 @@
     }
     .container{ text-align:center; }
 
-    /* SVG hoa được vẽ nét */
-    svg{
-      width:200px; height:200px;
-      stroke:#c73737;
-      stroke-width:3;
-      fill:none;
-      stroke-dasharray:1000;
-      stroke-dashoffset:1000;
-      animation: draw 3s ease forwards;
-    }
-    @keyframes draw{
-      to{ stroke-dashoffset:0; }
-    }
-
-    /* Màu xuất hiện sau khi vẽ xong */
-    .flower-fill{ opacity:0; animation: fill 2s ease forwards 2.5s; }
-    @keyframes fill{ to{opacity:1;} }
-
-    #clickText{
-      margin-top:20px;
-      font-size:22px;
-      font-weight:700;
-      color:#d94343;
+    /* Ảnh hoa */
+    .rose{
+      width:240px; 
       cursor:pointer;
-      opacity:0;
-      animation: show 1s ease forwards 3s;
+      transition: transform 0.3s ease;
     }
-    @keyframes show{ to{opacity:1;} }
+    .rose:hover{
+      transform: scale(1.05);
+    }
 
     /* Lớp thư đầu tiên */
     #envelope{
@@ -76,10 +57,8 @@
 <body>
   <div class="container">
 
-    <!-- HOA TỰ VẼ -->
-    <img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" alt="rose" class="rose">
-
-    <div id="clickText">Click me now!</div>
+    <!-- ẢNH HOA -->
+    <img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" alt="rose" class="rose" id="rose">
 
     <!-- LỚP BÌA THƯ -->
     <div id="envelope">
@@ -100,17 +79,20 @@
   </div>
 
   <script>
-    const clickText = document.getElementById('clickText');
+    const rose = document.getElementById('rose');
     const envelope = document.getElementById('envelope');
     const realLetter = document.getElementById('realLetter');
 
-    clickText.addEventListener('click', ()=>{
+    // Click ảnh hoa -> hiện bìa thư
+    rose.addEventListener('click', ()=>{
       envelope.style.display = 'block';
     });
 
+    // Click bìa thư -> mở thư thật
     envelope.addEventListener('click', ()=>{
       realLetter.style.display = 'block';
     });
   </script>
 </body>
 </html>
+
