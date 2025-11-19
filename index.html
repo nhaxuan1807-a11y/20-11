@@ -11,17 +11,15 @@
     background:#f7efed;
     font-family:sans-serif;
     text-align:center;
-    height:100vh;
-    overflow-x:hidden;
+    min-height:100vh;
   }
 
   /* 🌹 Container hoa */
   .container {
-    position:relative;
-    margin-top:220px; /* hoa xuống 220px từ trên */
     display:flex;
     justify-content:center;
     width:100%;
+    margin-top:220px; /* hoa xuống 220px */
   }
 
   /* 🌹 HOA */
@@ -37,8 +35,8 @@
   /* ✉️ BÌA THƯ */
   #envelope {
     display:none;
-    position:absolute;
-    top:10px; /* lên sát trên */
+    position:fixed; /* luôn nằm trên màn hình */
+    top:10px;       /* cách trên 10px */
     left:50%;
     transform: translateX(-50%) scale(0);
     width:90vw;
@@ -55,11 +53,10 @@
     align-items:center;
     cursor:pointer;
     transition: transform 0.7s cubic-bezier(.25,1.5,.5,1);
-    padding:15px 20px; /* giảm padding trên/dưới */
+    padding:15px 20px;
     z-index:10;
   }
 
-  /* Glow chữ 20/11 */
   #envelope span {
     animation: glow 2s ease-in-out infinite;
   }
@@ -77,7 +74,7 @@
     border:2px solid #ffc7d9;
     padding:15px;
     opacity:0;
-    transform: translateY(20px) scale(0.85); /* giảm dịch xuống */
+    transform: translateY(20px) scale(0.85);
     transition: transform 0.7s ease, opacity 0.7s ease;
     color:#fff;
     text-align:left;
@@ -112,16 +109,16 @@
   <img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" class="rose" id="rose" alt="Hoa hồng">
 </div>
 
-<!-- ✉️ Bìa thư (cố định trên màn hình) -->
+<!-- ✉️ Bìa thư + lá thư -->
 <div id="envelope">
   <span>20/11</span>
 
-  <!-- 📄 Lá thư -->
   <div id="letter">
     <p>Kính gửi cô Huyền,</p>
     <p>Nhân ngày Nhà giáo Việt Nam 20/11, chúng em xin gửi lời chúc chân thành đến cô.</p>
     <p>Chúc cô luôn mạnh khỏe, hạnh phúc, tràn đầy nhiệt huyết và luôn là nguồn cảm hứng cho bao thế hệ học trò.</p>
     <p>Chúc cô có một ngày tràn đầy niềm vui, không lo deadline và luôn nhận được nụ cười!</p>
+    <p>Chúc cô luôn rạng rỡ tỏa sáng với nụ cười ấm áp và trái tim tận tụy người đã gieo cho tụi em những điều đẹp nhất.</p>
   </div>
 </div>
 
@@ -131,7 +128,6 @@ const envelope = document.getElementById('envelope');
 const letter = document.getElementById('letter');
 const paragraphs = letter.querySelectorAll('p');
 
-// Click hoa
 rose.addEventListener('click', () => {
   rose.classList.add('fadeout');
   setTimeout(() => { rose.style.display = 'none'; }, 500);
@@ -140,7 +136,6 @@ rose.addEventListener('click', () => {
   setTimeout(() => { envelope.style.transform = 'translateX(-50%) scale(1)'; }, 20);
 });
 
-// Click bìa thư
 envelope.addEventListener('click', () => {
   envelope.style.animation = 'shake 0.3s';
   setTimeout(() => { envelope.style.animation = ''; }, 300);
