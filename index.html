@@ -109,52 +109,55 @@
 
   <!-- ✉️ Bìa thư -->
   <div id="envelope">
-    20/11
+    <span>20/11</span>
 
     <!-- 📄 Lá thư -->
     <div id="letter">
-      <p class="line">Kính gửi cô Huyền,</p>
-      <p class="line">Nhân ngày Nhà giáo Việt Nam 20/11, con xin gửi lời biết ơn chân thành đến cô, người đã luôn tận tâm chỉ dạy.</p>
-      <p class="line">Chúc cô luôn mạnh khỏe, hạnh phúc, tràn đầy nhiệt huyết và là nguồn cảm hứng cho bao thế hệ học trò</p>
-      <p class="line">Chúc cô ngày 20/11 tràn đầy niềm vui, không lo deadline và luôn nhận được nụ cười từ học trò!</p>
-      <p class="line">Chúc cô luôn rạng rỡ tỏa sáng với nụ cười ấm áp và trái tim tận tụy người đã gieo cho tụi em những điều đẹp nhất</p>
+      <p>Kính gửi cô Huyền,</p>
+      <p>Nhân ngày Nhà giáo Việt Nam 20/11, con xin gửi lời biết ơn chân thành đến cô, người đã luôn tận tâm chỉ dạy.</p>
+      <p>Chúc cô luôn mạnh khỏe, hạnh phúc, tràn đầy nhiệt huyết và luôn là nguồn cảm hứng cho bao thế hệ học trò.</p>
+      <p>Chúc cô ngày 20/11 tràn đầy niềm vui, không lo deadline và luôn nhận được nụ cười!</p>
     </div>
   </div>
 </div>
 
 <script>
-const rose = document.getElementById("rose");
-const envelope = document.getElementById("envelope");
-const letter = document.getElementById("letter");
+const rose = document.getElementById('rose');
+const envelope = document.getElementById('envelope');
+const letter = document.getElementById('letter');
+const paragraphs = letter.querySelectorAll('p'); // Lấy tất cả <p> bên trong #letter
 
-// **Sửa selector ở đây để chọn đúng các dòng trong lá thư**
-const lines = document.querySelectorAll("#letter .line");
+rose.addEventListener('click', () => {
+  rose.classList.add('fadeout');
+  setTimeout(() => { rose.style.display = 'none'; }, 500);
 
-rose.addEventListener("click", () => {
-  rose.classList.add("fadeout");
-  setTimeout(() => { rose.style.display="none"; }, 500);
-
-  envelope.style.display = "flex";
-  setTimeout(() => { envelope.style.transform = "scale(1)"; }, 20);
+  envelope.style.display = 'flex';
+  setTimeout(() => { envelope.style.transform = 'scale(1)'; }, 20);
 });
 
 // Mở thư
-envelope.addEventListener("click", () => {
-  envelope.style.animation = "shake 0.3s"; // rung nhẹ
-  setTimeout(() => { envelope.style.animation = ""; }, 300);
+envelope.addEventListener('click', () => {
+  envelope.style.animation = 'shake 0.3s';
+  setTimeout(() => { envelope.style.animation = ''; }, 300);
 
-  letter.classList.add("open");
+  letter.style.opacity = 1; // mở lá thư
 
-  // Hiện từng dòng
+  // Hiện từng dòng <p>
   let delay = 400;
-  lines.forEach((p) => {
-    setTimeout(() => p.classList.add("show"), delay);
+  paragraphs.forEach(p => {
+    p.style.opacity = 0;
+    p.style.transform = 'translateY(10px)';
+    setTimeout(() => {
+      p.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      p.style.opacity = 1;
+      p.style.transform = 'translateY(0)';
+    }, delay);
     delay += 300;
   });
 });
 
 // Animation rung
-const styleShake = document.createElement("style");
+const styleShake = document.createElement('style');
 styleShake.innerHTML = `
 @keyframes shake {
   0% { transform: scale(1) rotate(0deg); }
