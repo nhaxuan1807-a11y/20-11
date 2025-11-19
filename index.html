@@ -7,93 +7,115 @@
   <style>
     /* --- Cài đặt cơ bản --- */
     body{
-      margin:0; display:flex; justify-content:center; align-items:center;
-      height:100vh; background:#220a0d; /* Nền tối */
+      margin:0; 
+      display:flex; 
+      justify-content:center; 
+      align-items:center;
+      height:100vh; 
+      background:#220a0d; /* Nền tối */
       font-family:sans-serif;
+      color: #f5f5f5; /* Màu chữ mặc định cho nền tối */
     }
     .container{ 
       text-align:center;
-      opacity: 0; /* Ẩn toàn bộ container ban đầu */
-      animation: container-in 1s ease forwards;
-    }
-    @keyframes container-in {
-      to { opacity: 1; }
+      /* Bông hoa sẽ là phần đầu tiên hiển thị, không cần ẩn container */
     }
 
     /* --- Ảnh hoa hồng (rose) --- */
     .rose{
-      max-width: 100%;
+      max-width: 250px; /* Đặt kích thước cố định để dễ quản lý */
       height: auto;
-      /* Hiệu ứng giúp nền trắng của ảnh hoa hòa trộn với nền */
-      mix-blend-mode: multiply; 
-      filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+      mix-blend-mode: multiply; /* Hiệu ứng giúp nền trắng của ảnh hoa hòa trộn với nền */
+      filter: drop-shadow(0 0 15px rgba(0,0,0,0.7)); /* Bóng đổ rõ hơn */
+      opacity: 0; /* Ẩn ban đầu */
+      animation: show-rose 1s ease forwards; /* Hiện ra sau khi tải trang */
+    }
+    @keyframes show-rose {
+      to { opacity: 1; }
     }
 
     /* --- Văn bản click (Bước 2) --- */
     #clickText{
-      margin-top:20px;
-      font-size:22px;
+      margin-top:30px; /* Tăng khoảng cách */
+      font-size:24px; /* Tăng kích thước chữ */
       font-weight:700;
       color:#ffb6c1; 
       cursor:pointer;
       opacity:0; /* Ẩn ban đầu */
-      animation: show-click 1s ease forwards 1s; /* Hiện sau 1 giây */
+      animation: show-element 1s ease forwards 1.5s; /* Hiện sau 1.5 giây */
+      transition: opacity 0.3s, transform 0.3s;
     }
-    @keyframes show-click{ to{opacity:1;} }
-    #clickText.hide {
+    @keyframes show-element{
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #clickText.hidden { /* Đổi tên class để tránh nhầm lẫn */
       opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s;
+      pointer-events: none; /* Vô hiệu hóa click khi ẩn */
     }
+    #clickText:hover { transform: scale(1.05); }
+
 
     /* --- Lớp bìa thư (Bước 3) --- */
     #envelope{
-      display:none; /* Ẩn ban đầu, sẽ hiện bằng JS */
+      display:none; /* Ẩn ban đầu bằng CSS */
       margin-top:30px;
       cursor:pointer;
+      opacity: 0; /* Ẩn ban đầu để dùng animation khi hiện ra */
+      animation: show-element 0.8s ease forwards; /* Animation khi hiển thị */
+      animation-delay: 0.1s; /* Chờ một chút sau khi clickText ẩn */
     }
     .letter-cover{
-      width:260px; height:180px;
-      background:#c73737; 
-      border-radius:10px;
-      box-shadow:0 6px 20px rgba(0,0,0,0.4);
+      width:280px; height:200px; /* Tăng kích thước bìa thư */
+      background:#8b0000; /* Đổi màu đỏ đậm hơn */
+      border-radius:12px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.6); /* Bóng đổ rõ hơn */
       display:flex; 
       flex-direction: column; 
       align-items:center; 
       justify-content:center;
       font-weight:600;
-      font-size:20px;
+      font-size:22px;
       color:#fff6f8; 
-      transition: transform 0.3s;
+      transition: transform 0.3s, background 0.3s;
     }
-    .letter-cover:hover { transform: scale(1.03); }
+    .letter-cover:hover { 
+      transform: scale(1.05); 
+      background: #a00000; /* Đổi màu khi hover */
+    }
 
     /* Icon thư */
     .envelope-icon {
-      font-size: 80px;
-      margin-bottom: 10px;
+      font-size: 90px; /* Tăng kích thước icon */
+      margin-bottom: 12px;
       line-height: 1;
+      text-shadow: 0 0 10px rgba(255,255,255,0.3); /* Hiệu ứng sáng cho icon */
     }
 
     /* --- Lá thư chính (Bước 4) --- */
     #realLetter{
-      display:none; /* Ẩn ban đầu, sẽ hiện bằng JS */
+      display:none; /* Ẩn ban đầu bằng CSS */
       margin-top:20px;
-      width:320px; padding:20px;
+      width:350px; padding:25px; /* Tăng kích thước lá thư */
       background:#1a080a; /* Nền tối của lá thư */
-      border-radius:10px;
-      box-shadow:0 6px 30px rgba(0,0,0,0.5);
+      border-radius:12px;
+      box-shadow:0 8px 30px rgba(0,0,0,0.7);
       color: #f5f5f5; /* Màu chữ sáng cho lá thư tối */
       border: 1px solid #4a1515; 
-      animation: open 0.6s ease forwards;
+      animation: open-letter 0.7s ease forwards; /* Đổi tên animation */
     }
-    @keyframes open{
-      from{ transform:scale(0.6); opacity:0; }
+    @keyframes open-letter{ /* Đổi tên animation */
+      from{ transform:scale(0.5); opacity:0; }
       to{ transform:scale(1); opacity:1; }
     }
     #realLetter p {
-      margin: 10px 0;
-      line-height: 1.5;
+      margin: 12px 0;
+      line-height: 1.6;
+      text-align: left; /* Căn lề trái cho nội dung thư */
+    }
+    #realLetter p:last-child {
+      text-align: right; /* Giữ căn lề phải cho chữ ký */
+      margin-top: 25px;
     }
   </style>
 </head>
@@ -102,7 +124,6 @@
 
         <img src="image.png" class="rose" alt="Hoa hồng">
     
-
         <div id="clickText">Click me now!</div>
 
         <div id="envelope">
@@ -129,22 +150,18 @@
     const envelope = document.getElementById('envelope');
     const realLetter = document.getElementById('realLetter');
 
-    // BƯỚC 3: Click 'Click me now!' -> Hiện Bìa thư
+    // BƯỚC 3: Click 'Click me now!' -> Ẩn chữ và Hiện Bìa thư
     clickText.addEventListener('click', ()=>{
-      // Ẩn chữ "Click me now!"
-      clickText.classList.add('hide'); 
+      clickText.classList.add('hidden'); // Ẩn chữ "Click me now!"
       
-      // Hiện Bìa thư (Mở thư)
-      envelope.style.display = 'block';
+      envelope.style.display = 'flex'; // Sử dụng flex để căn giữa nội dung bìa thư
     });
 
-    // BƯỚC 4: Click Bìa thư -> Hiện Lời chúc
+    // BƯỚC 4: Click Bìa thư -> Ẩn Bìa thư và Hiện Lời chúc
     envelope.addEventListener('click', ()=>{
-      // Ẩn Bìa thư
-      envelope.style.display = 'none';
+      envelope.style.display = 'none'; // Ẩn Bìa thư
 
-      // Hiện Lá thư chính (Lời chúc)
-      realLetter.style.display = 'block';
+      realLetter.style.display = 'block'; // Hiện Lá thư chính (Lời chúc)
     });
   </script>
 </body>
