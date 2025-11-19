@@ -62,36 +62,21 @@
     opacity:1;
     transform: scale(1) translateY(0);
   }
-
-  #greeting {
-    display:none;
-    margin-top:20px;
-    padding:15px;
-    background:#ffdadf;
-    border-radius:10px;
-    font-weight:600;
-    color:#a13333;
-    box-shadow:0 6px 20px rgba(0,0,0,0.15);
-    animation: slideDown 0.6s ease forwards;
-  }
-
-  @keyframes slideDown {
-    from { opacity:0; transform: translateY(-20px); }
-    to { opacity:1; transform: translateY(0); }
-  }
 </style>
 </head>
 <body>
 
+<!-- Bông hoa -->
 <img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" class="rose" id="rose">
 
+<!-- Lá thư -->
 <div id="envelope">
   <div id="letter">
-    <p>Kính gửi thầy/cô,</p>
+    <p>Kính gửi cô Huyền,</p>
     <p>Nhân ngày Nhà giáo Việt Nam 20/11, con xin gửi lời biết ơn chân thành
-    đến thầy/cô, người đã luôn tận tâm chỉ dạy.</p>
-    <p>Chúc thầy/cô luôn mạnh khỏe và hạnh phúc.</p>
-    <div id="greeting"><p>— Một học trò</p></div>
+    đến cô, người đã luôn tận tâm chỉ dạy.</p>
+    <p>Chúc cô luôn mạnh khỏe, hạnh phúc ,tràn đầy nhiệt huyết và luôn là nguồn cảm hứng cho bao thế hệ học trò. .</p>
+    <p>Chúc cô ngày 20/11 tràn đầy niềm vui, không lo deadline và luôn nhận được nụ cười từ học trò!</p>
   </div>
 </div>
 
@@ -99,9 +84,8 @@
   const rose = document.getElementById('rose');
   const envelope = document.getElementById('envelope');
   const letter = document.getElementById('letter');
-  const greeting = document.getElementById('greeting');
 
-  // Step 1: Click hoa -> hoa biến mất, thư xuất hiện
+  // Click hoa -> hoa biến mất, thư xuất hiện
   rose.addEventListener('click', ()=>{
     rose.style.opacity = '0';
     setTimeout(()=>{ rose.style.display = 'none'; }, 500);
@@ -109,12 +93,9 @@
     setTimeout(()=>{ envelope.style.transform = 'scale(1)'; envelope.style.opacity='1'; }, 50);
   });
 
-  // Step 2: Click thư -> thư mở ra, lời chúc xuất hiện trong thư
+  // Click thư -> thư mở ra
   envelope.addEventListener('click', ()=>{
     letter.classList.add('open');
-    setTimeout(()=>{
-      greeting.style.display='block';
-    }, 600);
   });
 </script>
 
