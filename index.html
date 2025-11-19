@@ -13,7 +13,6 @@
     height:100vh;
     background:#f7efed;
     font-family:sans-serif;
-    text-align:center;
   }
 
   .container {
@@ -28,7 +27,7 @@
   .rose {
     width:70vw;
     max-width:300px;
-    max-height:300px; /* giới hạn chiều cao */
+    max-height:300px;
     cursor:pointer;
     transition: transform 0.3s ease, opacity 0.5s ease;
   }
@@ -39,7 +38,7 @@
     width:90vw;
     max-width:350px;
     height:250px;
-    background:#ffdadf;
+    background:#ffcad4; /* bìa thư hồng */
     border-radius:10px;
     box-shadow:0 6px 20px rgba(0,0,0,0.2);
     display:flex;
@@ -60,13 +59,13 @@
     background:white;
     border-radius:8px;
     opacity:0;
-    transform: scale(0.8) translateY(-20px);
+    transform: scale(0.7) translateY(-30px);
     transition: transform 0.6s ease, opacity 0.6s ease;
-    padding:15px;
+    padding:20px;
     display:flex;
     flex-direction:column;
     justify-content:flex-start;
-    overflow-y:auto; /* scroll nếu quá dài */
+    overflow-y:auto;
     box-sizing:border-box;
   }
 
@@ -79,6 +78,14 @@
     margin-bottom:10px;
     line-height:1.4;
     text-align:left;
+    opacity:0;
+    transform: translateY(10px);
+    transition: all 0.5s ease;
+  }
+
+  #letter p.show {
+    opacity:1;
+    transform: translateY(0);
   }
 </style>
 </head>
@@ -86,10 +93,11 @@
 
 <div class="container">
   <!-- Bông hoa -->
-  <img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" class="rose" id="rose">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Red_Rose.jpg" class="rose" id="rose">
 
-  <!-- Lá thư -->
+  <!-- Bìa thư -->
   <div id="envelope">
+    <!-- Lá thư trắng -->
     <div id="letter">
       <p>Kính gửi cô Huyền,</p>
       <p>Nhân ngày Nhà giáo Việt Nam 20/11, con xin gửi lời biết ơn chân thành đến cô, người đã luôn tận tâm chỉ dạy.</p>
@@ -100,25 +108,30 @@
 </div>
 
 <script>
-  const rose = document.getElementById('rose');
-  const envelope = document.getElementById('envelope');
-  const letter = document.getElementById('letter');
+const rose = document.getElementById('rose');
+const envelope = document.getElementById('envelope');
+const letter = document.getElementById('letter');
+const paragraphs = letter.querySelectorAll('p');
 
-  // Click hoa -> hoa biến mất, thư xuất hiện
-  rose.addEventListener('click', ()=>{
-    rose.style.opacity = '0';
-    setTimeout(()=>{ rose.style.display = 'none'; }, 500);
-    envelope.style.display = 'flex';
-    setTimeout(()=>{
-      envelope.style.transform = 'scale(1)';
-      envelope.style.opacity='1';
-    }, 50);
-  });
+// Click hoa -> hoa biến mất, bìa thư xuất hiện
+rose.addEventListener('click', ()=>{
+  rose.style.opacity = '0';
+  setTimeout(()=>{ rose.style.display = 'none'; }, 500);
+  envelope.style.display = 'flex';
+  setTimeout(()=>{
+    envelope.style.transform = 'scale(1)';
+    envelope.style.opacity='1';
+  }, 50);
+});
 
-  // Click thư -> thư mở ra
-  envelope.addEventListener('click', ()=>{
-    letter.classList.add('open');
+// Click bìa thư -> lá thư mở ra và lời chúc xuất hiện
+envelope.addEventListener('click', ()=>{
+  letter.classList.add('open');
+  // Hiệu ứng hiện từng đoạn lời chúc
+  paragraphs.forEach((p, index) => {
+    setTimeout(()=>{ p.classList.add('show'); }, index*500);
   });
+});
 </script>
 
 </body>
