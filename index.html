@@ -22,7 +22,6 @@
     cursor:pointer;
     transition: transform 0.3s ease, opacity 0.5s ease;
   }
-
   .rose:hover { transform: scale(1.05); }
 
   #envelope {
@@ -66,9 +65,7 @@
 
   #greeting {
     display:none;
-    margin-top:220px;
-    width:90vw;
-    max-width:300px;
+    margin-top:20px;
     padding:15px;
     background:#ffdadf;
     border-radius:10px;
@@ -94,11 +91,8 @@
     <p>Nhân ngày Nhà giáo Việt Nam 20/11, con xin gửi lời biết ơn chân thành
     đến thầy/cô, người đã luôn tận tâm chỉ dạy.</p>
     <p>Chúc thầy/cô luôn mạnh khỏe và hạnh phúc.</p>
+    <div id="greeting"><p>— Một học trò</p></div>
   </div>
-</div>
-
-<div id="greeting">
-  <p>— Một học trò</p>
 </div>
 
 <script>
@@ -115,7 +109,7 @@
     setTimeout(()=>{ envelope.style.transform = 'scale(1)'; envelope.style.opacity='1'; }, 50);
   });
 
-  // Step 2: Click thư -> thư mở ra, lời chúc xuất hiện
+  // Step 2: Click thư -> thư mở ra, lời chúc xuất hiện trong thư
   envelope.addEventListener('click', ()=>{
     letter.classList.add('open');
     setTimeout(()=>{
