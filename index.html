@@ -51,15 +51,17 @@
     <!-- ẢNH HOA -->
     <img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" class="rose" id="rose">
 
-    <!-- LÁ THƯ (hiện sau khi bấm hoa) -->
+    <!-- LÁ THƯ -->
     <div id="letter">
       <p>Kính gửi thầy/cô,</p>
       <p>Nhân ngày Nhà giáo Việt Nam 20/11, con xin gửi lời biết ơn chân thành
-      đến thầy/cô.</p>
-      <p>Chúc thầy/cô luôn mạnh khỏe và hạnh phúc.</p>
+      đến thầy/cô, người đã luôn tận tâm chỉ dạy, truyền cảm hứng và đồng hành
+      trên con đường học tập của chúng con.</p>
+      <p>Chúc thầy/cô luôn mạnh khỏe, hạnh phúc và giữ mãi ngọn lửa nhiệt huyết
+      trong sự nghiệp trồng người.</p>
     </div>
 
-    <!-- LỜI CHÚC (hiện sau khi bấm thư) -->
+    <!-- LỜI CHÚC -->
     <div id="greeting">
       <p>— Một học trò</p>
     </div>
@@ -71,12 +73,13 @@
   const letter = document.getElementById('letter');
   const greeting = document.getElementById('greeting');
 
+  // Click hoa → ẩn hoa, hiện thư
   rose.addEventListener('click', () => {
-    greeting.style.display = 'none'; // CHẮC CHẮN ẨN LỜI CHÚC
     rose.style.display = 'none';
     letter.style.display = 'block';
   });
 
+  // Click thư → ẩn thư, hiện lời chúc
   letter.addEventListener('click', () => {
     letter.style.display = 'none';
     greeting.style.display = 'block';
