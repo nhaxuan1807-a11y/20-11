@@ -38,7 +38,7 @@
   #envelope {
     display:none;
     position:absolute;
-    top:20px; /* đẩy lên gần đầu màn hình */
+    top:10px; /* lên sát trên */
     left:50%;
     transform: translateX(-50%) scale(0);
     width:90vw;
@@ -55,7 +55,7 @@
     align-items:center;
     cursor:pointer;
     transition: transform 0.7s cubic-bezier(.25,1.5,.5,1);
-    padding:20px;
+    padding:15px 20px; /* giảm padding trên/dưới */
     z-index:10;
   }
 
@@ -75,16 +75,16 @@
     background:#333;
     border-radius:10px;
     border:2px solid #ffc7d9;
-    padding:20px;
+    padding:15px;
     opacity:0;
-    transform: translateY(30px) scale(0.85);
+    transform: translateY(20px) scale(0.85); /* giảm dịch xuống */
     transition: transform 0.7s ease, opacity 0.7s ease;
     color:#fff;
     text-align:left;
     font-size:1.2rem;
     line-height:1.5;
     box-shadow:0 6px 20px rgba(0,0,0,0.15);
-    margin-top:15px;
+    margin-top:10px;
   }
 
   #letter.open {
