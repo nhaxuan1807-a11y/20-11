@@ -16,6 +16,14 @@
     text-align:center;
   }
 
+  .container {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    width:100%;
+  }
+
   .rose {
     width:70vw;
     max-width:300px;
@@ -28,7 +36,7 @@
     display:none;
     width:90vw;
     max-width:350px;
-    height:200px;
+    height:250px;
     background:#ffdadf;
     border-radius:10px;
     box-shadow:0 6px 20px rgba(0,0,0,0.2);
@@ -52,31 +60,40 @@
     opacity:0;
     transform: scale(0.8) translateY(-50px);
     transition: transform 0.6s ease, opacity 0.6s ease;
-    padding:20px;
+    padding:15px;
     display:flex;
     flex-direction:column;
-    justify-content:center;
+    justify-content:flex-start;
+    overflow-y:auto;
+    box-sizing:border-box;
   }
 
   #letter.open {
     opacity:1;
     transform: scale(1) translateY(0);
   }
+
+  #letter p {
+    margin-bottom:10px;
+    line-height:1.4;
+    text-align:left;
+  }
 </style>
 </head>
 <body>
 
-<!-- Bông hoa -->
-<img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" class="rose" id="rose">
+<div class="container">
+  <!-- Bông hoa -->
+  <img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" class="rose" id="rose">
 
-<!-- Lá thư -->
-<div id="envelope">
-  <div id="letter">
-    <p>Kính gửi cô Huyền,</p>
-    <p>Nhân ngày Nhà giáo Việt Nam 20/11, con xin gửi lời biết ơn chân thành
-    đến cô, người đã luôn tận tâm chỉ dạy.</p>
-    <p>Chúc cô luôn mạnh khỏe, hạnh phúc ,tràn đầy nhiệt huyết và luôn là nguồn cảm hứng cho bao thế hệ học trò. .</p>
-    <p>Chúc cô ngày 20/11 tràn đầy niềm vui, không lo deadline và luôn nhận được nụ cười từ học trò!</p>
+  <!-- Lá thư -->
+  <div id="envelope">
+    <div id="letter">
+      <p>Kính gửi cô Huyền,</p>
+      <p>Nhân ngày Nhà giáo Việt Nam 20/11, con xin gửi lời biết ơn chân thành đến cô, người đã luôn tận tâm chỉ dạy.</p>
+      <p>Chúc cô luôn mạnh khỏe, hạnh phúc, tràn đầy nhiệt huyết và luôn là nguồn cảm hứng cho bao thế hệ học trò.</p>
+      <p>Chúc cô ngày 20/11 tràn đầy niềm vui, không lo deadline và luôn nhận được nụ cười!</p>
+    </div>
   </div>
 </div>
 
@@ -90,7 +107,10 @@
     rose.style.opacity = '0';
     setTimeout(()=>{ rose.style.display = 'none'; }, 500);
     envelope.style.display = 'flex';
-    setTimeout(()=>{ envelope.style.transform = 'scale(1)'; envelope.style.opacity='1'; }, 50);
+    setTimeout(()=>{
+      envelope.style.transform = 'scale(1)';
+      envelope.style.opacity='1';
+    }, 50);
   });
 
   // Click thư -> thư mở ra
