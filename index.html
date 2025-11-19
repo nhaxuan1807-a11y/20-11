@@ -1,69 +1,57 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Hoa 20/11</title>
-  <style>
-    body{
-      margin:0; display:flex; justify-content:center; align-items:center;
-      height:100vh; background:#f7efed; font-family:sans-serif;
-      padding:10px;
-      box-sizing:border-box;
-      text-align:center;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hoa 20/11</title>
+<style>
+  body {
+    margin:0; 
+    display:flex; 
+    justify-content:center; 
+    align-items:center;
+    height:100vh; 
+    background:#f7efed; 
+    font-family:sans-serif;
+    padding:10px;
+    box-sizing:border-box;
+    text-align:center;
+  }
 
-    /* Ảnh hoa */
-    .rose{
-      width:70vw; 
-      max-width:300px;
-      cursor:pointer;
-      transition: transform 0.3s ease;
-    }
-    .rose:hover{
-      transform: scale(1.05);
-    }
+  .rose {
+    width:70vw; 
+    max-width:300px; 
+    cursor:pointer;
+    transition: transform 0.3s ease;
+  }
+  .rose:hover {
+    transform: scale(1.05);
+  }
 
-    /* Lá thư */
-    #letter{
-      display:none;
-      width:90vw;
-      max-width:350px;
-      padding:20px;
-      background:white;
-      border-radius:10px;
-      box-shadow:0 6px 30px rgba(0,0,0,0.18);
-      cursor:pointer;
-      animation: open 0.6s ease forwards;
-    }
+  #letter, #greeting {
+    display:none;
+    width:90vw;
+    max-width:350px;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 6px 30px rgba(0,0,0,0.18);
+    cursor:pointer;
+  }
 
-    /* Lời chúc */
-    #greeting{
-      display:none;
-      width:90vw;
-      max-width:350px;
-      padding:20px;
-      background:#ffdadf;
-      border-radius:10px;
-      font-weight:600;
-      color:#a13333;
-      box-shadow:0 6px 20px rgba(0,0,0,0.15);
-      animation: fadeIn 0.6s ease forwards;
-    }
+  #letter {
+    background:white;
+  }
 
-    @keyframes open{
-      from{ transform:scale(0.6); opacity:0; }
-      to{ transform:scale(1); opacity:1; }
-    }
-    @keyframes fadeIn{
-      from{ opacity:0; }
-      to{ opacity:1; }
-    }
-  </style>
+  #greeting {
+    background:#ffdadf;
+    font-weight:600;
+    color:#a13333;
+    box-shadow:0 6px 20px rgba(0,0,0,0.15);
+  }
+</style>
 </head>
 <body>
   <div class="container">
-
     <!-- ẢNH HOA -->
     <img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" alt="rose" class="rose" id="rose">
 
@@ -79,27 +67,24 @@
 
     <!-- LỜI CHÚC -->
     <div id="greeting">
-      <p style="font-size:18px;">— Một học trò</p>
+      <p>— Một học trò</p>
     </div>
-
   </div>
 
-  <script>
-    const rose = document.getElementById('rose');
-    const letter = document.getElementById('letter');
-    const greeting = document.getElementById('greeting');
+<script>
+  const rose = document.getElementById('rose');
+  const letter = document.getElementById('letter');
+  const greeting = document.getElementById('greeting');
 
-    // Click hoa -> ẩn hoa, hiện thư
-    rose.addEventListener('click', ()=>{
-      rose.style.display = 'none';
-      letter.style.display = 'block';
-    });
+  rose.addEventListener('click', () => {
+    rose.style.display = 'none';
+    letter.style.display = 'block';
+  });
 
-    // Click thư -> ẩn thư, hiện lời chúc
-    letter.addEventListener('click', ()=>{
-      letter.style.display = 'none';
-      greeting.style.display = 'block';
-    });
-  </script>
+  letter.addEventListener('click', () => {
+    letter.style.display = 'none';
+    greeting.style.display = 'block';
+  });
+</script>
 </body>
 </html>
