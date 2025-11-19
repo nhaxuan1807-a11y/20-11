@@ -9,22 +9,17 @@
   body {
     margin:0;
     display:flex;
-    justify-content:center;
-    align-items:flex-start; /* căn hoa từ trên xuống */
+    flex-direction:column;
+    align-items:center;
     min-height:100vh;
     background:#f7efed;
     font-family:sans-serif;
     text-align:center;
   }
 
+  /* 🌹 Container hoa */
   .container {
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start; 
-    align-items:center;
-    width:100%;
-    max-width:400px;
-    padding-top:220px; /* hoa xuống thấp hơn */
+    margin-top:220px; /* hoa xuống 220px từ trên */
   }
 
   /* 🌹 HOA */
@@ -33,7 +28,7 @@
     max-width:320px;
     cursor:pointer;
     transition: transform 0.4s ease, opacity 0.6s ease;
-    margin-bottom:40px; /* khoảng cách đến lá thư */
+    margin-bottom:20px; /* khoảng cách đến lá thư */
   }
   .rose:hover { transform: scale(1.08); }
   .rose.fadeout { opacity:0; transform: scale(0.7); }
@@ -59,6 +54,7 @@
     position:relative;
     user-select:none;
     padding:20px;
+    margin-bottom:20px;
   }
 
   /* Glow chữ 20/11 */
@@ -72,7 +68,8 @@
 
   /* 👇 LÁ THƯ */
   #letter {
-    width:100%;
+    width:90vw;
+    max-width:360px;
     background:#333; /* nền tối */
     border-radius:10px;
     border:2px solid #ffc7d9;
@@ -80,12 +77,10 @@
     opacity:0;
     transform: translateY(30px) scale(0.85);
     transition: transform 0.7s ease, opacity 0.7s ease;
-    overflow-y:auto;
     box-shadow:0 6px 20px rgba(0,0,0,0.15);
-    position:relative;
     color:#fff; /* chữ trắng */
     text-align:left;
-    font-size:1.2rem; /* chữ to hơn */
+    font-size:1.2rem;
     line-height:1.5;
   }
 
@@ -112,18 +107,261 @@
 <div class="container">
   <!-- 🌹 Hoa -->
   <img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" class="rose" id="rose" alt="Hoa hồng">
+</div>
 
-  <!-- ✉️ Bìa thư -->
-  <div id="envelope">
-    <span>20/11</span>
+<!-- ✉️ Bìa thư -->
+<div id="envelope">
+  <span>20/11</span>
 
-    <!-- 📄 Lá thư -->
-    <div id="letter">
-      <p>Kính gửi cô Huyền,</p>
-      <p>Nhân ngày Nhà giáo Việt Nam 20/11, chúng em xin gửi lời chúc chân thành đến cô.</p>
-      <p>Chúc cô luôn mạnh khỏe, hạnh phúc, tràn đầy nhiệt huyết và luôn là nguồn cảm hứng cho bao thế hệ học trò.</p>
-      <p>Chúc cô có một ngày tràn đầy niềm vui, không lo deadline và luôn nhận được nụ cười!</p>
-    </div>
+  <!-- 📄 Lá thư -->
+  <div id="letter">
+    <p>Kính gửi cô Huyền,</p>
+    <p>Nhân ngày Nhà giáo Việt Nam 20/11, chúng em xin gửi lời chúc chân thành đến cô.</p>
+    <p>Chúc cô luôn mạnh khỏe, hạnh phúc, tràn đầy nhiệt huyết và luôn là nguồn cảm hứng cho bao thế hệ học trò.</p>
+    <p>Chúc cô có một ngày tràn đầy niềm vui, không lo deadline và luôn nhận được nụ cười!</p>
+    <p><!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hoa 20/11</title>
+
+<style>
+  body {
+    margin:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    min-height:100vh;
+    background:#f7efed;
+    font-family:sans-serif;
+    text-align:center;
+  }
+
+  /* 🌹 Container hoa */
+  .container {
+    margin-top:220px; /* hoa xuống 220px từ trên */
+  }
+
+  /* 🌹 HOA */
+  .rose {
+    width:85vw; 
+    max-width:320px;
+    cursor:pointer;
+    transition: transform 0.4s ease, opacity 0.6s ease;
+    margin-bottom:20px; /* khoảng cách đến lá thư */
+  }
+  .rose:hover { transform: scale(1.08); }
+  .rose.fadeout { opacity:0; transform: scale(0.7); }
+
+  /* ✉️ BÌA THƯ */
+  #envelope {
+    display:none;
+    width:90vw;
+    max-width:360px;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color:#ffffff;
+    font-size:28px;
+    font-weight:700;
+    border-radius:15px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.25);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    transform: scale(0);
+    transition: transform 0.7s cubic-bezier(.25,1.5,.5,1);
+    position:relative;
+    user-select:none;
+    padding:20px;
+    margin-bottom:20px;
+  }
+
+  /* Glow chữ 20/11 */
+  #envelope span {
+    animation: glow 2s ease-in-out infinite;
+  }
+  @keyframes glow {
+    0%, 100% { text-shadow:0 0 8px #fff, 0 0 12px #ffb6d1; }
+    50% { text-shadow:0 0 12px #fff, 0 0 18px #ff8ab3; }
+  }
+
+  /* 👇 LÁ THƯ */
+  #letter {
+    width:90vw;
+    max-width:360px;
+    background:#333; /* nền tối */
+    border-radius:10px;
+    border:2px solid #ffc7d9;
+    padding:20px;
+    opacity:0;
+    transform: translateY(30px) scale(0.85);
+    transition: transform 0.7s ease, opacity 0.7s ease;
+    box-shadow:0 6px 20px rgba(0,0,0,0.15);
+    color:#fff; /* chữ trắng */
+    text-align:left;
+    font-size:1.2rem;
+    line-height:1.5;
+  }
+
+  #letter.open {
+    opacity:1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Lời chúc xuất hiện từng dòng */
+  #letter p {
+    opacity:0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    margin-bottom:12px;
+  }
+  #letter p.show {
+    opacity:1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- 🌹 Hoa -->
+  <img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" class="rose" id="rose" alt="Hoa hồng">
+</div>
+
+<!-- ✉️ Bìa thư -->
+<div id="envelope">
+  <span>20/11</span>
+
+  <!-- 📄 Lá thư -->
+  <div id="letter">
+    <p>Kính gửi cô Huyền,</p>
+    <p>Nhân ngày Nhà giáo Việt Nam 20/11, chúng em xin gửi lời chúc chân thành đến cô.</p>
+    <p>Chúc cô luôn mạnh khỏe, hạnh phúc, tràn đầy nhiệt huyết và luôn là nguồn cảm hứng cho bao thế hệ học trò.</p>
+    <p>Chúc cô có một ngày tràn đầy niềm vui, không lo deadline và luôn nhận được nụ cười!</p>
+    <p><!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hoa 20/11</title>
+
+<style>
+  body {
+    margin:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    min-height:100vh;
+    background:#f7efed;
+    font-family:sans-serif;
+    text-align:center;
+  }
+
+  /* 🌹 Container hoa */
+  .container {
+    margin-top:220px; /* hoa xuống 220px từ trên */
+  }
+
+  /* 🌹 HOA */
+  .rose {
+    width:85vw; 
+    max-width:320px;
+    cursor:pointer;
+    transition: transform 0.4s ease, opacity 0.6s ease;
+    margin-bottom:20px; /* khoảng cách đến lá thư */
+  }
+  .rose:hover { transform: scale(1.08); }
+  .rose.fadeout { opacity:0; transform: scale(0.7); }
+
+  /* ✉️ BÌA THƯ */
+  #envelope {
+    display:none;
+    width:90vw;
+    max-width:360px;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color:#ffffff;
+    font-size:28px;
+    font-weight:700;
+    border-radius:15px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.25);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    transform: scale(0);
+    transition: transform 0.7s cubic-bezier(.25,1.5,.5,1);
+    position:relative;
+    user-select:none;
+    padding:20px;
+    margin-bottom:20px;
+  }
+
+  /* Glow chữ 20/11 */
+  #envelope span {
+    animation: glow 2s ease-in-out infinite;
+  }
+  @keyframes glow {
+    0%, 100% { text-shadow:0 0 8px #fff, 0 0 12px #ffb6d1; }
+    50% { text-shadow:0 0 12px #fff, 0 0 18px #ff8ab3; }
+  }
+
+  /* 👇 LÁ THƯ */
+  #letter {
+    width:90vw;
+    max-width:360px;
+    background:#333; /* nền tối */
+    border-radius:10px;
+    border:2px solid #ffc7d9;
+    padding:20px;
+    opacity:0;
+    transform: translateY(30px) scale(0.85);
+    transition: transform 0.7s ease, opacity 0.7s ease;
+    box-shadow:0 6px 20px rgba(0,0,0,0.15);
+    color:#fff; /* chữ trắng */
+    text-align:left;
+    font-size:1.2rem;
+    line-height:1.5;
+  }
+
+  #letter.open {
+    opacity:1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Lời chúc xuất hiện từng dòng */
+  #letter p {
+    opacity:0;
+    transform: translateY(10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    margin-bottom:12px;
+  }
+  #letter p.show {
+    opacity:1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- 🌹 Hoa -->
+  <img src="ChatGPT Image 18_10_36 19 thg 11, 2025.png" class="rose" id="rose" alt="Hoa hồng">
+</div>
+
+<!-- ✉️ Bìa thư -->
+<div id="envelope">
+  <span>20/11</span>
+
+  <!-- 📄 Lá thư -->
+  <div id="letter">
+    <p>Kính gửi cô Huyền,</p>
+    <p>Nhân ngày Nhà giáo Việt Nam 20/11, chúng em xin gửi lời chúc chân thành đến cô.</p>
+    <p>Chúc cô luôn mạnh khỏe, hạnh phúc, tràn đầy nhiệt huyết và luôn là nguồn cảm hứng cho bao thế hệ học trò.</p>
+    <p>Chúc cô có một ngày tràn đầy niềm vui, không lo deadline và luôn nhận được nụ cười!</p>
+    <p>Chúc cô luôn rạng rỡ tỏa sáng với nụ cười ấm áp và trái tim tận tụy người đã gieo cho tụi em những điều đẹp nhất.</p>
   </div>
 </div>
 
@@ -133,6 +371,7 @@ const envelope = document.getElementById('envelope');
 const letter = document.getElementById('letter');
 const paragraphs = letter.querySelectorAll('p');
 
+// Click hoa
 rose.addEventListener('click', () => {
   rose.classList.add('fadeout');
   setTimeout(() => { rose.style.display = 'none'; }, 500);
@@ -141,6 +380,7 @@ rose.addEventListener('click', () => {
   setTimeout(() => { envelope.style.transform = 'scale(1)'; }, 20);
 });
 
+// Click bìa thư
 envelope.addEventListener('click', () => {
   envelope.style.animation = 'shake 0.3s';
   setTimeout(() => { envelope.style.animation = ''; }, 300);
@@ -169,4 +409,99 @@ document.head.appendChild(styleShake);
 
 </body>
 </html>
+</p>
+  </div>
+</div>
 
+<script>
+const rose = document.getElementById('rose');
+const envelope = document.getElementById('envelope');
+const letter = document.getElementById('letter');
+const paragraphs = letter.querySelectorAll('p');
+
+// Click hoa
+rose.addEventListener('click', () => {
+  rose.classList.add('fadeout');
+  setTimeout(() => { rose.style.display = 'none'; }, 500);
+
+  envelope.style.display = 'flex';
+  setTimeout(() => { envelope.style.transform = 'scale(1)'; }, 20);
+});
+
+// Click bìa thư
+envelope.addEventListener('click', () => {
+  envelope.style.animation = 'shake 0.3s';
+  setTimeout(() => { envelope.style.animation = ''; }, 300);
+
+  letter.classList.add('open');
+
+  let delay = 400;
+  paragraphs.forEach(p => {
+    setTimeout(() => { p.classList.add('show'); }, delay);
+    delay += 300;
+  });
+});
+
+// Animation rung
+const styleShake = document.createElement('style');
+styleShake.innerHTML = `
+@keyframes shake {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.02) rotate(1deg); }
+  50% { transform: scale(1) rotate(0deg); }
+  75% { transform: scale(1.02) rotate(-1deg); }
+  100% { transform: scale(1) rotate(0); }
+}`;
+document.head.appendChild(styleShake);
+</script>
+
+</body>
+</html>
+</p>
+  </div>
+</div>
+
+<script>
+const rose = document.getElementById('rose');
+const envelope = document.getElementById('envelope');
+const letter = document.getElementById('letter');
+const paragraphs = letter.querySelectorAll('p');
+
+// Click hoa
+rose.addEventListener('click', () => {
+  rose.classList.add('fadeout');
+  setTimeout(() => { rose.style.display = 'none'; }, 500);
+
+  envelope.style.display = 'flex';
+  setTimeout(() => { envelope.style.transform = 'scale(1)'; }, 20);
+});
+
+// Click bìa thư
+envelope.addEventListener('click', () => {
+  envelope.style.animation = 'shake 0.3s';
+  setTimeout(() => { envelope.style.animation = ''; }, 300);
+
+  letter.classList.add('open');
+
+  let delay = 400;
+  paragraphs.forEach(p => {
+    setTimeout(() => { p.classList.add('show'); }, delay);
+    delay += 300;
+  });
+});
+
+// Animation rung
+const styleShake = document.createElement('style');
+styleShake.innerHTML = `
+@keyframes shake {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.02) rotate(1deg); }
+  50% { transform: scale(1) rotate(0deg); }
+  75% { transform: scale(1.02) rotate(-1deg); }
+  100% { transform: scale(1) rotate(0); }
+}`;
+document.head.appendChild(styleShake);
+</script>
+
+</body>
+</html>
